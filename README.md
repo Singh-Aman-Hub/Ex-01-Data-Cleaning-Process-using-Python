@@ -175,10 +175,9 @@ Screenshots of the codes with Outputs:
 
 
 
+# RESULT
+        Thus we have cleaned the data and removed the outliers by detection using IQR and Z-score
 
-"""**Result**
 
-Thus we have cleaned the data and removed the outliers by detection using IQR and Z-score
-"""
 
-         
+

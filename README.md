@@ -100,12 +100,16 @@ df
 import seaborn as sns
 sns.heatmap(df.isnull(),yticklabels=False,annot=True)
 ```
+
 <img width="556" alt="Screenshot 2025-04-19 at 10 47 19 AM" src="https://github.com/user-attachments/assets/27646194-1aef-4b59-99b0-8f1e1a9952ca" />
+
 ```
 df.dropna(inplace=True)
 sns.heatmap(df.isnull(),yticklabels=False,annot=True)
 ```
+
 <img width="565" alt="Screenshot 2025-04-19 at 10 48 26 AM" src="https://github.com/user-attachments/assets/d5b072c8-a0c3-429c-9639-96c961933d6e" />
+
 
 0UTLIERS DETECTION AND REMOVAL USING IQR
 ```

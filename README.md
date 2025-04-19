@@ -1,4 +1,4 @@
-# Exno:1
+<img width="726" alt="image" src="https://github.com/user-attachments/assets/c25f6b4b-3d6d-4fe4-b63f-7cb3af200a42" /># Exno:1
 Data Cleaning Process
 
 # AIM
@@ -31,6 +31,11 @@ df=pd.read_csv("/content/SAMPLEIDS (1).csv")
 df
 ```
 ![image](https://github.com/user-attachments/assets/15a41b32-9b69-4788-82ed-c09181d9463e)
+```
+df.describe()
+```
+<img width="728" alt="Screenshot 2025-04-19 at 10 45 16 AM" src="https://github.com/user-attachments/assets/8710005f-c753-4980-b55a-89c31dab5ed6" />
+
 ```
 df.isnull()
 ```
@@ -91,6 +96,16 @@ df['TOTAL'].fillna(value=df['TOTAL'].mean(),inplace=True)
 df
 ```
 ![image](https://github.com/user-attachments/assets/439dbb76-debb-4c22-a8d6-0603e8ba770d)
+```
+import seaborn as sns
+sns.heatmap(df.isnull(),yticklabels=False,annot=True)
+```
+<img width="556" alt="Screenshot 2025-04-19 at 10 47 19 AM" src="https://github.com/user-attachments/assets/27646194-1aef-4b59-99b0-8f1e1a9952ca" />
+```
+df.dropna(inplace=True)
+sns.heatmap(df.isnull(),yticklabels=False,annot=True)
+```
+<img width="565" alt="Screenshot 2025-04-19 at 10 48 26 AM" src="https://github.com/user-attachments/assets/d5b072c8-a0c3-429c-9639-96c961933d6e" />
 
 0UTLIERS DETECTION AND REMOVAL USING IQR
 ```

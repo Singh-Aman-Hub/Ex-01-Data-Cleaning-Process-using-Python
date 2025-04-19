@@ -4,8 +4,6 @@ Data Cleaning Process
 # AIM
 To read the given data and perform data cleaning and save the cleaned data to a file.
 
-#Regno: 212224040020 Name: Aman Singh
-
 # Explanation
 Data cleaning is the process of preparing data for analysis by removing or modifying data that is incorrect ,incompleted , irrelevant , duplicated or improperly formatted. Data cleaning is not simply about erasing data ,but rather finding a way to maximize datasets accuracy without necessarily deleting the information.
 
@@ -23,161 +21,191 @@ STEP 5: Remove outliers using IQR
 STEP 6: Use zscore of to remove outliers
 
 # Coding and Output
-Pyhton codes:
+```
+    REG NO : 212224040020
+    NAME   : AMAN SINGH
+```
+```
 import pandas as pd
-import numpy as np
-df=pd.read_csv("/content/SAMPLEIDS.csv")
+df=pd.read_csv("/content/SAMPLEIDS (1).csv")
 df
-
-df.shape
-
-df.describe()
-
-df.info()
-
-df.head(10)
-
-df.tail(5)
-
-df.isna()
-
-df.isna().sum()
-
-df.dropna(how="any").shape
-
-x=df.dropna(how="any")
-x
-
-mn=df.TOTAL.mean()
-mn
-
-df.TOTAL.fillna(mn,inplace=True)
+```
+![image](https://github.com/user-attachments/assets/15a41b32-9b69-4788-82ed-c09181d9463e)
+```
+df.isnull()
+```
+![image](https://github.com/user-attachments/assets/74d86fab-2d07-4b48-a362-6997474f8a10)
+```
+df.notnull()
+```
+![image](https://github.com/user-attachments/assets/255eac22-9b90-4f3a-baed-4c3c18ef38ee)
+```
+df.dropna(axis=1)
+```
+![image](https://github.com/user-attachments/assets/4009b6d2-cbb1-40b6-bf2e-1bc64116cf99)
+```
+df.dropna(axis=0)
+```
+![image](https://github.com/user-attachments/assets/b84f9e07-d501-4fd5-be21-a0d689606092)
+```
+dfs=df[df['TOTAL']>270]
+dfs
+```
+![image](https://github.com/user-attachments/assets/65a835a3-86e7-4fdf-b681-31ae89476f0a)
+```
+dfs=df[df['NAME'].str.startswith(('A','C'))&(df['TOTAL']>250)]
+dfs
+```
+![image](https://github.com/user-attachments/assets/f99e8d33-1104-4645-9bef-fcdaa4d21045)
+```
+df.iloc[:4]
+```
+![image](https://github.com/user-attachments/assets/b2607f2b-f704-4c8b-9a93-9f68c1495d84)
+```
+df.iloc[0:4,1:4]
+```
+![image](https://github.com/user-attachments/assets/387143ac-dec8-4567-9781-530dc33589df)
+```
+df.iloc[[1,3,5],[1,3]]
+```
+![image](https://github.com/user-attachments/assets/7fbcd8d4-d140-4b11-bdee-7ad8943ef3c4)
+```
+dff=df.fillna(0)
+dff
+```
+![image](https://github.com/user-attachments/assets/da9adaa6-a031-4c4d-9858-1d98977a400a)
+```
+df['TOTAL'].fillna(value=df['TOTAL'].mean())
+```
+![image](https://github.com/user-attachments/assets/ed6d8871-e654-4361-a959-629c72c96080)
+```
+df.fillna(method='ffill')
+```
+![image](https://github.com/user-attachments/assets/517a482a-42cd-4e79-9dba-7ee06c53fac1)
+```
+df.fillna(method='bfill')
+```
+![image](https://github.com/user-attachments/assets/abeac8cb-bab4-4fed-b173-7290dabd4cc8)
+```
+df['TOTAL'].fillna(value=df['TOTAL'].mean(),inplace=True)
 df
+```
+![image](https://github.com/user-attachments/assets/439dbb76-debb-4c22-a8d6-0603e8ba770d)
 
-df.isnull().sum()
-
-df.M1.fillna(method="ffill",inplace=True)
-df
-
-df.isna().sum()
-
-df.M2.fillna(method='ffill',inplace=True)
-df
-
-df.isna().sum()
-
-df.M3.fillna(method='ffill',inplace=True)
-df
-
-df.isna().sum()
-
-df.duplicated()
-
-df.drop_duplicates(inplace=True)
-df
-
-df.duplicated()
-
-df['DOB']
-
+0UTLIERS DETECTION AND REMOVAL USING IQR
+```
 import seaborn as sns
-sns.heatmap(df.isnull(),yticklabels=False,annot=True)
-
-df.dropna(inplace=True)
-sns.heatmap(df.isnull(),yticklabels=False,annot=True)
-
-"""**OutLiers Detection and removal Using IQR**"""
-
 age=[1,3,28,27,25,92,30,39,40,50,26,24,29,94]
-df=pd.DataFrame(age)
-df
-
-sns.boxplot(data=df)
-
-sns.scatterplot(data=df)
-
-q1=df.quantile(0.25)
-q3=df.quantile(0.75)
+af=pd.DataFrame(age)
+af
+```
+![image](https://github.com/user-attachments/assets/391fb7cd-8e3f-45fb-8c40-6756d0636bdf)
+```
+sns.boxplot(data=af)
+```
+![image](https://github.com/user-attachments/assets/16181738-c2b9-4fb9-a018-f5858d6e5102)
+```
+sns.scatterplot(data=af)
+```
+![image](https://github.com/user-attachments/assets/447de853-af34-48f5-b6a6-df9eb10fd083)
+```
+q1=af.quantile(0.25)
+q2=af.quantile(0.5)
+q3=af.quantile(0.75)
 iqr=q3-q1
 iqr
-
-Q1=np.percentile(df,25)
-Q3=np.percentile(df,75)
+```
+![image](https://github.com/user-attachments/assets/1ddd848d-9859-4bbd-b228-a1d48fe5c85e)
+```
+Q1=np.percentile(af,25)
+Q3=np.percentile(af,75)
 IQR=Q3-Q1
 IQR
-
+```
+![image](https://github.com/user-attachments/assets/e45f611c-ccef-4c16-aa1e-4430f5da203d)
+```
 lower_bound=Q1-1.5*IQR
 upper_bound=Q3+1.5*IQR
 lower_bound
-
+```
+![image](https://github.com/user-attachments/assets/5065350a-745e-4954-a38c-bea0d931caab)
+```
 upper_bound
-
+```
+![image](https://github.com/user-attachments/assets/86adf43b-1304-477e-aee1-4ba3510e7bc1)
+```
 outliers=[x for x in age if x<lower_bound or x>upper_bound]
 print("Q1:",Q1)
 print("Q3:",Q3)
-print("IQR:",IQR)
-print("Lower Bound:",lower_bound)
-print("Upper Bound:",upper_bound)
+print("IQR",IQR)
+print("Lower bound:",lower_bound)
+print("Upper bound:",upper_bound)
 print("Outliers:",outliers)
-
-df=df[((df>=lower_bound)&(df<=upper_bound))]
-df
-
-df=df.dropna()
-df
-
-sns.boxplot(data=df)
-
-sns.scatterplot(data=df)
-
+```
+![image](https://github.com/user-attachments/assets/bd9ee991-ea4f-4259-ac4b-608a3119ad75)
+```
+af=af[((af>=lower_bound)&(af<=upper_bound))]
+af
+```
+![image](https://github.com/user-attachments/assets/d6e57b04-6bd9-473a-b78b-05a9fca7cdaa)
+```
+af.dropna()
+```
+![image](https://github.com/user-attachments/assets/caa344fc-d063-4d51-95eb-429037887941)
+```
+sns.boxplot(data=af)
+```
+![image](https://github.com/user-attachments/assets/ba8e11c4-b887-44aa-9997-33586f9f405f)
+```
+sns.scatterplot(data=af)
+```
+![image](https://github.com/user-attachments/assets/838b27ce-6bff-47b5-8653-173302c6ed67)
+```
 data=[1,2,2,2,3,1,1,15,2,2,2,3,1,1,2]
 mean=np.mean(data)
 std=np.std(data)
-print('mean of the dataset is',mean)
-print('std.deviation is',std)
-
+print("mean of the dataset is",mean)
+print("standard deviation is",std)
+```
+![image](https://github.com/user-attachments/assets/97691a8d-55e3-429f-9959-e8f60e7a2649)
+```
 threshold=3
 outlier=[]
 for i in data:
   z=(i-mean)/std
   if z>threshold:
     outlier.append(i)
-print('outlier in dataset is',outlier);
-
+print("outlier in dataset is",outlier)
+```
+![image](https://github.com/user-attachments/assets/ce58795a-df5c-44a0-a1a2-f606715f0426)
+```
 from scipy import stats
-data={'weight':[12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,
-66,69,202,72,75,78,81,84,232,87,90,93,96,99,258]}
+data={'weight':[12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,202,72,75,78,81,84,232,87,90,93,96,99,258,]}
 df=pd.DataFrame(data)
 df
-
+```
+![image](https://github.com/user-attachments/assets/938a2825-38e0-473d-8352-57cfd5520b26)
+```
 z=np.abs(stats.zscore(df))
 print(df[z['weight']>3])
+```
+![image](https://github.com/user-attachments/assets/60324583-ade4-4304-8866-759f87138928)
+```
+val=[12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,202,72,75,78,81,84,232,87,90,93,96,99,258,]
+out=[]
+def d_o(val):
+  ts=3
+  m=np.mean(val)
+  sd=np.std(val)
+  for i in val:
+    z=(i-m)/sd
+    if np.abs(z)>ts:
+      out.append(i)
+  return out
+op=d_o(val)
+op
+```
+![image](https://github.com/user-attachments/assets/db164048-27b5-45db-a9de-f2862f9bcae4)
 
-Screenshots of the codes with Outputs:
-
-<img width="1440" alt="Screenshot 2025-04-14 at 12 49 21 PM" src="https://github.com/user-attachments/assets/8b9c2bba-b68d-4347-8ce4-6b802c35e04b" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 49 27 PM" src="https://github.com/user-attachments/assets/29de6e3c-269b-4688-b323-43d5a0a6bac9" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 49 32 PM" src="https://github.com/user-attachments/assets/ce7cd5ba-4282-4c23-b766-0413c9e79816" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 49 37 PM" src="https://github.com/user-attachments/assets/8d535cc7-42a2-43e6-b5c3-a22d03909bec" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 49 45 PM" src="https://github.com/user-attachments/assets/f94b8cf6-628a-4751-a482-92140f86cf79" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 49 50 PM" src="https://github.com/user-attachments/assets/9a31f5f6-20b5-4401-b0ad-fc7bf0318eff" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 49 56 PM" src="https://github.com/user-attachments/assets/b5bf1047-1a7c-4df3-84a9-f5562c9fac60" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 00 PM" src="https://github.com/user-attachments/assets/0107a476-e318-4d84-9e49-42afbea98fb0" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 03 PM" src="https://github.com/user-attachments/assets/7cd4f487-8585-4a29-8b73-1fc0129e3099" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 07 PM" src="https://github.com/user-attachments/assets/0cc7c3af-44bf-48b3-a656-b9f2ec9cc523" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 11 PM" src="https://github.com/user-attachments/assets/83fbe3eb-bbe4-4865-8993-9662dcb61d72" />
-
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 15 PM" src="https://github.com/user-attachments/assets/17ba07d5-3f26-4b23-8db4-a5236f68e310" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 20 PM" src="https://github.com/user-attachments/assets/286ebdd5-4bbb-4fd9-96f1-9210d7e70914" />
-
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 23 PM" src="https://github.com/user-attachments/assets/d113d1ef-4b27-41b7-87c0-e6ff2ba73fc5" />
-<img width="1440" alt="Screenshot 2025-04-14 at 12 50 35 PM" src="https://github.com/user-attachments/assets/f5b6d117-5864-44b5-9930-c9591b3edd3f" />
-
-
-
-# RESULT
-        Thus we have cleaned the data and removed the outliers by detection using IQR and Z-score
-
-
-
-
+# Result
+ Thus we have cleaned the data and removed the outliers by detection using IQR and Z-score 
